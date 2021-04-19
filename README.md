@@ -1,5 +1,11 @@
 # UnoBot [![Build Status](https://travis-ci.org/mjsalerno/UnoBot.svg?branch=master)](https://travis-ci.org/mjsalerno/UnoBot) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e350ee3c24084dcda3900fd324a8cd01)](https://www.codacy.com/app/roofis20002003/UnoBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mjsalerno/UnoBot&amp;utm_campaign=Badge_Grade) [![codecov](https://codecov.io/gh/mjsalerno/UnoBot/branch/master/graph/badge.svg)](https://codecov.io/gh/mjsalerno/UnoBot)
 
+# TRIPLEZER0 COMMIT
+1. Removed AI player bot
+
+# TripleZer0 TO-DO
+1. Update card look!!!
+
 UnoBot is an IRC bot that is written in java. It has a pircbotx back end so it's easy to change settings. 
 The bot connects to an IRC server/channel
 and allows members of the channel to play a game of uno. It also has an AI so it can play too.

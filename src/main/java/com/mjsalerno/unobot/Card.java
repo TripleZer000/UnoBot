@@ -67,7 +67,7 @@ public class Card implements Comparable<Card>, Comparator<Card> {
         switch (this.color) // is of type SomeValue  
         {
             case RED:
-                colorString = bg(Colors.WHITE, Colors.RED);
+                colorString = bg(Colors.BLACK, Colors.RED);
                 break;
 
             case BLUE:

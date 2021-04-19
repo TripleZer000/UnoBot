@@ -441,7 +441,7 @@ public class UnoBot extends ListenerAdapter {
             bot.sendIRC().notice(sender, this.token + "draw ----- Draws a card when you don't have a playable card.");            
             bot.sendIRC().notice(sender, this.token + "pass ----- If you don't have a playable card after you draw");
             bot.sendIRC().notice(sender, "            then you pass.");
-            bot.sendIRC().notice(sender, this.token + "fullhelp - Shows all commands.");
+            bot.sendIRC().notice(sender, this.token + "fullhelp - Shows all commands. -- TripleZer0 was here :P");
             
     	} //HELP
         else if (tokens[0].equalsIgnoreCase(this.token + "fullhelp")) {
@@ -470,7 +470,7 @@ public class UnoBot extends ListenerAdapter {
             bot.sendIRC().notice(sender, "            you the top card and whos turn it is.");
             bot.sendIRC().notice(sender, this.token + "players -- Displays the player list.");
             bot.sendIRC().notice(sender, this.token + "score ---- Prints out the score board.");
-            bot.sendIRC().notice(sender, this.token + "ai ------- Turns the bot ai on or off.");
+//            bot.sendIRC().notice(sender, this.token + "ai ------- Turns the bot ai on or off.");
             bot.sendIRC().notice(sender, this.token + "endgame -- Ends the game, only the person who started the");
             bot.sendIRC().notice(sender, "            game may end it.");
             
@@ -554,7 +554,7 @@ public class UnoBot extends ListenerAdapter {
                 this.bot.sendIRC().message(channel, "The Score Board is empty");
             }
         } //AI
-        else if (tokens[0].equalsIgnoreCase(this.token + "ai")) {
+        else if (tokens[0].equalsIgnoreCase(this.token + "anoi")) {
             
             startAI();
             
@@ -625,13 +625,23 @@ public class UnoBot extends ListenerAdapter {
         else if (tokens[0].equalsIgnoreCase(this.token + "players") && gameUp) {
             printPlayers(channel);
         } //DEAL
-        else if ((tokens[0].equalsIgnoreCase(this.token + "deal") || tokens[0].equalsIgnoreCase(this.token + "de")) && !delt && gameUp ) {
-        	if ((sender.equals(gameStarter)) || (botOps.isOper(sender))) {        		
-        		dealCards();
-        		
-        	} else {
+        else if ((tokens[0].equalsIgnoreCase(this.token + "deal") || tokens[0].equalsIgnoreCase(this.token + "de")) && !delt && gameUp) {
+ //       	if ((sender.equals(gameStarter)) || (botOps.isOper(sender))) {        		
+ //       		dealCards();
+ //       		
+ //       	} else if ((players.size() == 1)) {
+//        		bot.sendIRC().message(channel, "You need 2 or more players!");
+////////////
+        if ((players.size() == 1)) {
+        	bot.sendIRC().message(channel, "You need 2 or more players!");
+    
+        } else if ((sender.equals(gameStarter)) || (botOps.isOper(sender))) {        		
+            dealCards();
+///////////
+            } else {
         		bot.sendIRC().message(channel, "Only gamestarter (" + gameStarter + ") may deal cards");
         	}
+            
         } //WHAT
         else if ((tokens[0].equalsIgnoreCase(this.token + "what")) && (delt)) {
             bot.sendIRC().message(channel, TOP_CARD + deck.topCard().toIRCString());
@@ -744,7 +754,7 @@ public class UnoBot extends ListenerAdapter {
 
 
                             if ( card.getWildColor() == null ) {
-                                bot.sendIRC().notice(sender, "You must set the new color when playing a WILD card");
+                                bot.sendIRC().notice(sender, "You must set the new color when playing a WILD card with !play color wd4 or !play color wild.");
                                 hitReturn = true;
                             }
                             
@@ -839,9 +849,9 @@ public class UnoBot extends ListenerAdapter {
 		
 		deck.createDeck(this.extreme);
 		
-if (autoAI && players.size() == 1 && !botAI) {
-			bot.sendIRC().message(gameChannel, "There is only one player in this game, launching AI player");
-			startAIthread();
+if (autoAI && players.size() == 2 && !botAI) {
+			bot.sendIRC().message(gameChannel, "There is only one player in this game, get another player");
+			//startAIthread();
 		}
 		
 		players.deal(deck);
@@ -873,7 +883,7 @@ if (autoAI && players.size() == 1 && !botAI) {
 
 	private void startAI() {
 		
-		if (!botAI) {
+		if (!nonotallowedbotAI) {
 		    Configuration configuration2;
 		    Configuration.Builder configBuilder = new Configuration.Builder()
 		            .setName(unoAINick)
